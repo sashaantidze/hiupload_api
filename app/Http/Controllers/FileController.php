@@ -23,7 +23,7 @@ class FileController extends Controller
 
     public function signed(Request $request)
     {
-        $filename = md5($request->name . microtime() . '.' . $request->extension);
+        $filename = md5($request->name . microtime()) . '.' . $request->extension;
 
         //dd(config('filesystems.disks.s3.key'));
 
@@ -40,7 +40,7 @@ class FileController extends Controller
 
         return response()->json([
             'attributes' => $object->getFormAttributes(),
-            'additionalData' => $object->getFormInputs()
+            'additionalData' => $object->getFormInputs(),
         ]);
 
     }
