@@ -29,7 +29,7 @@ class FileController extends Controller
 
         $object = new PostObjectV4(
             Storage::disk('s3')->getAdapter()->getClient(),
-            config('filesystems.disks.s3.bucket'),
+            config('filesystems.disks.s3.bucket'), // Dots (.) fucking up whole thing! NEVER use dots in s3 bucket names!!!
             ['key' => 'files/' . $filename],
             [
                 ['bucket' => config('filesystems.disks.s3.bucket')],
