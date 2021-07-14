@@ -26,5 +26,6 @@ Route::post('/login', LoginController::class);
 Route::post('/logout', LogoutController::class);
 
 Route::get('/files', [FileController::class, 'index']);
+Route::post('/files', [FileController::class, 'store']);
 Route::post('/files/signed', [FileController::class, 'signed']);
 
