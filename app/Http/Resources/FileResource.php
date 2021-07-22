@@ -17,6 +17,7 @@ class FileResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
+            'size' => $this->size,
         ];
     }
 }
