@@ -3,15 +3,18 @@
 namespace App\Models;
 
 use App\Models\File;
+use App\Models\Plan;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Cashier\Billable;
+use Laravel\Cashier\Subscription;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -49,4 +52,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(File::class);
     }
+
+
+    public function usage()
+    {
+        return $this->files->sum('size');
+    }
+
+
+    public function plan()
+    {
+        return $this->hasOneThrough(
+            Plan::class,
+            Subscription::class,
+            'user_id', 'stripe_id', 'id', 'stripe_plan'
+        )->whereNull('subscriptions.ends_at')
+        ->withDefault(Plan::free()->toArray());
+    }
+
+
+
 }

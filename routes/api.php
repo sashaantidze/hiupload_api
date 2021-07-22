@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\UserUsageController;
 use App\Http\Controllers\FileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,16 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/user', UserController::class);
+Route::get('/user/usage', UserUsageController::class);
+Route::get('/files', [FileController::class, 'index']);
 
 
 Route::post('/login', LoginController::class);
 Route::post('/logout', LogoutController::class);
-
-Route::get('/files', [FileController::class, 'index']);
 Route::post('/files', [FileController::class, 'store']);
 Route::post('/files/signed', [FileController::class, 'signed']);
+
+
 Route::delete('/files/{file:uuid}', [FileController::class, 'destroy']);
 
