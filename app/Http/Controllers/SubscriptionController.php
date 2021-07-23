@@ -14,7 +14,7 @@ class SubscriptionController extends Controller
     }
 
 
-    public function store(Request  $request)
+    public function store(Request $request)
     {
         //validate in future
 
