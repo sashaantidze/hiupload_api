@@ -71,5 +71,11 @@ class User extends Authenticatable
     }
 
 
+    public function canDowngradeToPlan(Plan $plan)
+    {
+        return $this->usage() <= $plan->storage;
+    }
+
+
 
 }

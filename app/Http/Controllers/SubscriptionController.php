@@ -22,4 +22,10 @@ class SubscriptionController extends Controller
 
         $request->user()->newSubscription('default', $plan->stripe_id)->create($request->token);
     }
+
+
+    public function update(Request $request)
+    {
+        $plan = Plan::whereSlug($request->plan)->first();
+    }
 }
