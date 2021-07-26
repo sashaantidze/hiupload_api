@@ -65,7 +65,7 @@ class User extends Authenticatable
         return $this->hasOneThrough(
             Plan::class,
             Subscription::class,
-            'user_id', 'stripe_id', 'id', 'stripe_plan'
+            'user_id', 'stripe_id', 'id', 'stripe_price'
         )->whereNull('subscriptions.ends_at')
         ->withDefault(Plan::free()->toArray());
     }

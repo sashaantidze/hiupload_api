@@ -54,6 +54,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'client_url' => env('APP_CLIENT_URL', 'http://localhost:8080/'),
+
     'asset_url' => env('ASSET_URL', null),
 
     /*
@@ -67,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tbilisi',
 
     /*
     |--------------------------------------------------------------------------
