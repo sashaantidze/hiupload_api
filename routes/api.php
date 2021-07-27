@@ -21,6 +21,7 @@ Route::get('/files', [FileController::class, 'index']);
 Route::get('/plans', PlanController::class);
 Route::get('/subscriptions/intent', StripeIntentController::class);
 Route::get('/user/plan_availability', UserPlanAvailabilityController::class);
+Route::get('/files/{file:uuid}/links', [FileLinkController::class, 'show']);
 
 
 Route::post('/login', LoginController::class);

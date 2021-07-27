@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FileResource;
+use Illuminate\Support\Facades\Storage;
 use App\Models\File;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class FileLinkController extends Controller
 {
@@ -27,5 +29,30 @@ class FileLinkController extends Controller
                 'url' => config('app.client_url').'/download/' . $file->uuid . '?token=' . $link->token
             ]
         ];
+    }
+
+
+    public function show(Request $request, File $file)
+    {
+        $file = File::whereUuid($file->uuid)
+            ->whereHas('links', function($query) use ($request) {
+                $query->where('token', $request->token);
+            })
+            ->firstOrFail();
+
+
+        return (new FileResource($file))
+        ->additional([
+                'meta' => [
+                    'url' => Storage::disk('s3')->temporaryUrl(
+                        $file->path,
+                        now()->addHours(2),
+                        [
+                            'ResponseContentType' => 'application/octet-stream',
+                            'ResponseContentDisposition' => 'attachment; filename='.$file->name
+                        ]
+                    )
+                ]
+            ]);
     }
 }
