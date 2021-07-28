@@ -10,8 +10,8 @@ use App\Http\Controllers\StripeIntentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserPlanAvailabilityController;
 use App\Http\Controllers\UserUsageController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 
 
