@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FileLinkController;
@@ -10,8 +11,8 @@ use App\Http\Controllers\StripeIntentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserPlanAvailabilityController;
 use App\Http\Controllers\UserUsageController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 
 
@@ -24,6 +25,7 @@ Route::get('/user/plan_availability', UserPlanAvailabilityController::class);
 Route::get('/files/{file:uuid}/links', [FileLinkController::class, 'show']);
 
 
+Route::post('/register', RegisterController::class);
 Route::post('/login', LoginController::class);
 Route::post('/logout', LogoutController::class);
 Route::post('/files', [FileController::class, 'store']);
