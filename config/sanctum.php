@@ -15,7 +15,7 @@ return [
 
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
         '%s%s',
-        '127.0.0.1:8080,127.0.0.1:8000,localhost:8080,localhost,localhost:8000,localhost:3000,::1',
+        '192.168.0.103,192.168.0.103:8000,127.0.0.1:8080,127.0.0.1:8000,localhost:8080,localhost,localhost:8000,localhost:3000,::1',
         env('APP_URL') ? ','.parse_url(env('APP_URL'), PHP_URL_HOST) : ''
     ))),
 
